@@ -4,6 +4,9 @@ Changelog
 0.8 (unreleased)
 ----------------
 
+- Add autoinclude entry point.
+  [afrepues]
+
 
 0.7 (2012-05-15)
 ------------------

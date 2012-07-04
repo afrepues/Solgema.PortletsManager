@@ -34,9 +34,12 @@ class PortletManagerKSS(basePloneKSSView):
         retriever = getMultiAdapter((self.context, manager), ISolgemaPortletManagerRetriever)
         managedPortletsHashes = [a['hash'] for a in retriever.getManagedPortlets()]
         if portlethash in listhashes:
-            hashBefore = managedPortletsHashes[managedPortletsHashes.index(portlethash)+delta]
             listhashes.remove(portlethash)
-            listhashes.insert(listhashes.index(hashBefore), portlethash)
+            if portlethash in managedPortletsHashes:
+                hashBefore = managedPortletsHashes[managedPortletsHashes.index(portlethash)+delta]
+                listhashes.insert(listhashes.index(hashBefore), portlethash)
+            else:
+                listhashes.insert(delta, portlethash)
             manager.listAllManagedPortlets = listhashes
         else:
             manager.listAllManagedPortlets = listhashes.insert(delta,portlethash)
